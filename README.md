@@ -1,4 +1,4 @@
-# restitution-momentum-calc
+# Restitution Momentum Calculator
 
 A Python3 project I made as a proof of concept for collisions based on newtons law of restitution for my CAIE A Level Further Maths 9231 Mechanics course.
 This project uses the math library and matrices from the numpy library in order to make simultaneous equations using conservation of momentum and Newtons law of restitution to calculate speeds of objects after colliding given a coefficient of restitution x, where 0 ≤ x ≤ 1.
