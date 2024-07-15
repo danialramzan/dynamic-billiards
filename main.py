@@ -2,11 +2,15 @@ import driver
 
 driver.ask()
 choice = int(input("What choice do you want to choose? "))
-m1 = float(input("Enter mass of particle 1 in kg: "))
-m2 = float(input("Enter mass of particle 2 in kg: "))
-u1 = float(input("Enter initial velocity of particle 1 in m/s: "))
-u2 = float(input("Enter initial velocity of particle 2 in m/s: "))
+
 if choice == 1:
+    m1, m2, u1, u2 = driver.prompt_mass_and_velocity()
     driver.collision_straight(m1, m2, u1, u2)
+
 if choice == 2:
+    m1, m2, u1, u2 = driver.prompt_mass_and_velocity()
     driver.collision_angle(m1, m2, u1, u2)
+
+if choice == 3:
+    m2, mode = driver.prompt_pi()
+    driver.collision_pi(1, m2, 0, -10, mode)
