@@ -1,4 +1,6 @@
 import math
+import time
+
 import numpy
 
 choice = stop = 0  # initializing variables
@@ -91,21 +93,24 @@ def calculate_velocity(e, u1, u2, m1, m2):
 
 
 def collision_pi(m1, m2, u1, u2, mode):
-    u1, u2 = calculate_velocity(1, 0, u2, m1, m2)
-    collisions = 1
-    print(u1,u2)
+    # c = 0
+    collisions = 0
+    print(u1, u2, collisions, "collisions")
 
     # assume the ball on the right is hurling towards the ball on the left
     # (after the first collision) while abs of the block on the left is greater than the block on the right,
     # more collisions will occur
 
-    while u1 >= 0 or u2 >= 0 or abs(u2) <= abs(u1):
+    while not (u1 >= 0 and u2 >= 0 and abs(u2) >= abs(u1)):
         if u1 < 0:
+            u1 = -u1
             collisions += 1
-            u1, u2 = calculate_velocity(1, -u1, u2, m1, m2)
-        else:
-            u1, u2 = calculate_velocity(1, u1, u2, m1, m2)
-        print(u1, u2)
+            print(u1, u2, collisions, "(REBOUND) collisions")
+            if u1 >= 0 and u2 >= 0 and abs(u2) >= abs(u1):
+                break
+
+        u1, u2 = calculate_velocity(1, u1, u2, m1, m2)
         collisions += 1
+        print(u1, u2, collisions, "collisions")
 
     print("The value of pi is:", collisions)
