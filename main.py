@@ -12,5 +12,5 @@ if choice == 2:
     driver.collision_angle(m1, m2, u1, u2)
 
 if choice == 3:
-    m2, mode = driver.prompt_pi()
-    driver.collision_pi(1, m2, 0, -10, mode)
+    dp, mode = driver.prompt_pi()
+    driver.collision_pi(dp, mode)

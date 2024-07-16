@@ -1,5 +1,5 @@
 import math
-import time
+
 
 import numpy
 
@@ -30,24 +30,23 @@ def prompt_pi():
 
     # therefore, m = 100^(d)
 
-    m2 = 100 ** int(input("How many d.p do you want to calculate pi to?: "))  # 1
+    dp = int(input("How many d.p do you want to calculate pi to?: "))  # 1
     print("What level of output do you want? ")
     print("     'so' for Simple Output")
-    print("     'rd' for Raw Data")
     print("     'vm' for Verbose Mode")
 
-    mode = str(input("Please enter either 'so' or 'rd' or 'vm': "))
+    mode = str(input("Please enter either 'so' or 'vm': "))
     print(mode)
     flag = False
 
-    if mode == "so" or mode == "rd" or mode == "vm":
+    if mode == "so" or mode == "vm":
         flag = True
     while not flag:
-        mode = input("Incorrect input. Please enter either 'so' or 'rd' or 'vm':")
-        if mode == "so" or mode == "rd" or mode == "vm":
+        mode = input("Incorrect input. Please enter either 'so' or 'vm':")
+        if mode == "so" or mode == "vm":
             break
 
-    return m2, mode
+    return dp, mode
 
 
 def collision_straight(m1, m2, u1, u2):
@@ -92,10 +91,12 @@ def calculate_velocity(e, u1, u2, m1, m2):
     return vfinal1, vfinal2
 
 
-def collision_pi(m1, m2, u1, u2, mode):
-    # c = 0
+def collision_pi(dp, mode):
+    m1 = 1
+    u1 = 0
+    u2 = -1
+    m2 = 100 ** dp
     collisions = 0
-    print(u1, u2, collisions, "collisions")
 
     # assume the ball on the right is hurling towards the ball on the left
     # (after the first collision) while abs of the block on the left is greater than the block on the right,
@@ -105,12 +106,44 @@ def collision_pi(m1, m2, u1, u2, mode):
         if u1 < 0:
             u1 = -u1
             collisions += 1
-            print(u1, u2, collisions, "(REBOUND) collisions")
+            print_info(collisions, u1, u2, mode, rebound=True)
             if u1 >= 0 and u2 >= 0 and abs(u2) >= abs(u1):
                 break
 
         u1, u2 = calculate_velocity(1, u1, u2, m1, m2)
         collisions += 1
-        print(u1, u2, collisions, "collisions")
+        print_info(collisions, u1, u2, mode)
 
-    print("The value of pi is:", collisions)
+    print("\033[1m" + "The value of pi to", dp, "d.p is:", collisions / (10 ** dp), "\033[0m")
+
+
+def print_info(collisions, u1, u2, output_mode, rebound=False):
+    """
+        Prints information about the collision simulation.
+
+        SP1 and SP2 refer to simulated particle 1 and simulated particle 2 with speeds u1 and u2 respectively.
+
+        Parameters:
+        collisions (int): The current number of collisions.
+        u1 (float): The velocity of SP1 (simulated particle 1).
+        u2 (float): The velocity of SP2 (simulated particle 2).
+        output_mode (str): The mode of output. 'so' for Simple Output, 'vm' for Verbose Mode.
+        rebound (bool): Flag indicating if the collision is a rebound (default is False).
+
+        Returns:
+        None
+        """
+    if output_mode == "so":
+        if rebound:
+            print("[u1:", u1, "u2:", u2, "collisions:", collisions, "] <<REBOUND>>")
+        else:
+            print("[u1:", u1, "u2:", u2, "collisions:", collisions, "]")
+
+    if output_mode == "vm":
+        if rebound:
+            print("SP1 has collided against the wall and its velocity has changed from", "%.3f" % -u1,
+                  "to", "%.3f." % u1, "[u1 =", "%.3f," % u1, "u2 =", "%.3f]" % u2, "with", collisions, "collisions")
+        else:
+            print("SP1 has collided with SP2 and their velocities are [u1 =", "%.3f," % u1,
+                  "u2 =", "%.3f]," % u2, "                                    with", collisions, "collisions")
+
