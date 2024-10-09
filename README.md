@@ -2,6 +2,12 @@
 
 A Python project demonstrating the principles of dynamic billiards through various collision scenarios. Originally created by me during high school as a proof of concept for collisions based on Newton's Law of Restitution for my CAIE A Level Further Maths 9231 Mechanics course, this project has been expanded to include more complex and interesting collision simulations.
 
+![image](https://github.com/user-attachments/assets/9dccad1a-9e8a-499c-8201-422c1d3c5138)
+![image](https://github.com/user-attachments/assets/1cf3c35e-fc91-4805-af9b-ce00ed6bcce4)
+![image](https://github.com/user-attachments/assets/98f1d033-1eff-46a7-89ff-62000dfe65ee)
+![image](https://github.com/user-attachments/assets/40a5bcd1-340e-4c26-a318-d764dc971d25)
+
+
 ### Features
 Linear Collisions: Simulate two objects colliding in a straight line, demonstrating the basic principles of conservation of momentum and energy.
 
@@ -13,7 +19,11 @@ Pi Approximation: Use colliding balls to approximate the value of π, showcasing
   Galperin, G. (2003). Playing pool with π (the number π from a billiard point of view). Regular and Chaotic Dynamics, 8(4), 375-394. https://doi.org/10.1070/RD2003v008n04ABEH000252
 
 **Planned Features:**
-GUI Implementation
+- GUI Implementation
+- Visual Physics Engine for Particles colliding
+- Port program to C to [improve the efficiency of inefficiency.](https://c.tenor.com/7UarUv_Z1QYAAAAd/tenor.gif)
+
+
 
 ## User Stories:
 
